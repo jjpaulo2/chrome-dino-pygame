@@ -19,21 +19,28 @@ sprites_voador = pygame.sprite.Group(voador)
 chao = carregar_imagem('chao.png')
 game_over = carregar_imagem('game_over.png')
 
+EVENTO_MORRER = pygame.USEREVENT + 1
+
 executando = True
 while executando:
     for evento in pygame.event.get():
         if evento.type == pygame.QUIT:
             executando = False
         
-        if evento.type == pygame.KEYDOWN:
-            if evento.key == pygame.K_LEFT:
-                dino.velocidade_x = -10
-            if evento.key == pygame.K_RIGHT:
-                dino.velocidade_x = 10
-        if evento.type == pygame.KEYUP:
-            if evento.key in [pygame.K_LEFT, pygame.K_RIGHT]:
-                dino.stop()
-    
+        if evento.type == EVENTO_MORRER:
+            dino.vivo = False
+
+        if dino.vivo:
+            if evento.type == pygame.KEYDOWN:
+                if evento.key == pygame.K_LEFT:
+                    dino.velocidade_x = -10
+                if evento.key == pygame.K_RIGHT:
+                    dino.velocidade_x = 10
+                if evento.key == pygame.K_DOWN:
+                    dino.abaixar()
+            if evento.type == pygame.KEYUP:
+                if evento.key in [pygame.K_LEFT, pygame.K_RIGHT, pygame.K_DOWN]:
+                    dino.stop()
 
 
     tela.fill((255,255,255))
@@ -42,8 +49,8 @@ while executando:
     if dino.colisao(voador):
         if dino.vivo:
             print('GAME OVER')
-            dino.morrer()
-            pygame.time.delay(500)
+            dino.animar_morte()
+            pygame.time.set_timer(EVENTO_MORRER, 100)
             
     sprites_dino.update()
     sprites_dino.draw(tela)

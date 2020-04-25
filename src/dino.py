@@ -32,6 +32,8 @@ class Dino(pygame.sprite.Sprite):
         self.rect = pygame.rect.Rect(self.x, self.y, 44, 47)
 
         self.vivo = True
+        self.pulando = False
+        self.abaixado = False
 
 
     def update(self):
@@ -45,6 +47,12 @@ class Dino(pygame.sprite.Sprite):
 
     def stop(self):
         self.velocidade_x = 0
+
+        if self.set == 1:
+            x = self.rect.left
+            y = self.rect.top - 17
+            self.rect = pygame.rect.Rect(x, y, 44, 27)
+
         self.index = 0
         self.set = 0
         self.image = self.images[self.set][self.index]
@@ -52,9 +60,16 @@ class Dino(pygame.sprite.Sprite):
     def colisao(self, sprite: pygame.sprite.Sprite):
         return self.rect.colliderect(sprite.rect)
 
-    def morrer(self):
-        self.vivo = False
+    def animar_morte(self):
         self.velocidade_x = 0
         self.set = 2
         self.index = 0
+        self.image = self.images[self.set][self.index]
+
+    def abaixar(self):
+        x = self.rect.left
+        y = self.rect.top + 17
+        self.set = 1
+        self.index = 0
+        self.rect = pygame.rect.Rect(x, y, 59, 30)
         self.image = self.images[self.set][self.index]

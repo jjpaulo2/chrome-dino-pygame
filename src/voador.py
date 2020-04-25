@@ -22,6 +22,9 @@ class Voador(pygame.sprite.Sprite):
 
     def update(self):
         self.rect.move_ip(self.velocidade_x, self.velocidade_y)
+        
+        if self.rect.left < -10:
+            self.rect = pygame.rect.Rect(self.x, self.y, 43, 34)
 
         if(self.velocidade_x != 0):
             self.index += 1
