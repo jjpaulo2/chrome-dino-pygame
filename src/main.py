@@ -1,8 +1,7 @@
-#!/bin/python3
-
 import pygame
 
 from dino import Dino
+from voador import Voador
 from carregar_spites import carregar_imagem
 
 tela = pygame.display.set_mode((600,300))
@@ -14,7 +13,11 @@ fps = 15
 dino = Dino()
 sprites_dino = pygame.sprite.Group(dino)
 
+voador = Voador()
+sprites_voador = pygame.sprite.Group(voador)
+
 chao = carregar_imagem('chao.png')
+game_over = carregar_imagem('game_over.png')
 
 executando = True
 while executando:
@@ -31,10 +34,25 @@ while executando:
             if evento.key in [pygame.K_LEFT, pygame.K_RIGHT]:
                 dino.stop()
     
+
+
     tela.fill((255,255,255))
     tela.blit(chao, [0,235])
+
+    if dino.colisao(voador):
+        if dino.vivo:
+            print('GAME OVER')
+            dino.morrer()
+            pygame.time.delay(500)
+            
     sprites_dino.update()
     sprites_dino.draw(tela)
+
+    if dino.vivo:
+        sprites_voador.update()
+        sprites_voador.draw(tela)
+    else:
+        tela.blit(game_over, [200,100])
 
     clock.tick(fps)
     pygame.display.flip()
