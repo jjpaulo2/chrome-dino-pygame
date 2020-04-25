@@ -1,0 +1,11 @@
+[[source]]
+name = "chome-dino-pygame"
+url = "https://github.com/jjpaulo2/chrome-dino-pygame"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+
+[requires]
+python_version = "3.8"
