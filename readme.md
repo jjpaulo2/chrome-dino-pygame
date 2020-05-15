@@ -1,4 +1,4 @@
-# Sonic made with [PyGame](https://www.pygame.org)
+# Google Chrome's Dino made with [PyGame](https://www.pygame.org)
 
 This is a simple example what Pygame can do. To see more, get the official pygame news [here](https://www.pygame.org).
 
