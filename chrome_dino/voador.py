@@ -1,6 +1,6 @@
 import pygame
 
-from carregar_sprites import carregar_imagem
+from .carregar_sprites import carregar_imagem
 
 class Voador(pygame.sprite.Sprite):
 

@@ -1,8 +1,8 @@
 import pygame
 
-from dino import Dino
-from voador import Voador
-from carregar_sprites import carregar_imagem
+from .dino import Dino
+from .voador import Voador
+from .carregar_sprites import carregar_imagem
 
 tela = pygame.display.set_mode((600,300))
 pygame.display.set_caption("Google Chrome Dino Game")
