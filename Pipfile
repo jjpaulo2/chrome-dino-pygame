@@ -15,4 +15,4 @@ pygame = "*"
 python_version = "3.8"
 
 [scripts]
-dino = "python3 src/main.py"
+dino = "python3 -m chrome_dino"
